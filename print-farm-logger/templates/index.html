@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="mb-4">Print Farm Logger</h1>
+        <div class="d-grid gap-3">
+            <a href="{{ url_for('log_print') }}" class="btn btn-primary btn-xl">Log Print</a>
+            <a href="{{ url_for('maintenance') }}" class="btn btn-warning btn-xl">Log Maintenance</a>
+            <a href="{{ url_for('printers') }}" class="btn btn-info btn-xl">Manage Printers</a>
+            <a href="{{ url_for('items') }}" class="btn btn-success btn-xl">Manage Items</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

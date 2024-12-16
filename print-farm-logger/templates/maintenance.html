@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Log Maintenance</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="printer_id" class="form-label">Printer</label>
+                        <select class="form-select touch-input" id="printer_id" name="printer_id" required>
+                            <option value="">Select Printer</option>
+                            {% for printer in printers %}
+                            <option value="{{ printer.id }}">{{ printer.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Maintenance Description</label>
+                        <textarea class="form-control touch-input" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Log Maintenance</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Recent Maintenance</h2>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for log in recent_maintenance %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ log.printer.name }}</h5>
+                        <p class="mb-1">{{ log.description }}</p>
+                        <p class="mb-1">Time: {{ log.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
