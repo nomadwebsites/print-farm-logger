@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Add Item</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="sku" class="form-label">SKU</label>
+                        <input type="text" class="form-control touch-input" id="sku" name="sku" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Item Name</label>
+                        <input type="text" class="form-control touch-input" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control touch-input" id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Add Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Item List</h2>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for item in items %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ item.name }}</h5>
+                        <p class="mb-1">SKU: {{ item.sku }}</p>
+                        {% if item.description %}
+                        <p class="mb-1">Description: {{ item.description }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

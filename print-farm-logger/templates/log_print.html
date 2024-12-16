@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Log Print</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="printer_id" class="form-label">Printer</label>
+                        <select class="form-select touch-input" id="printer_id" name="printer_id" required>
+                            <option value="">Select Printer</option>
+                            {% for printer in printers %}
+                            <option value="{{ printer.id }}">{{ printer.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="item_id" class="form-label">Item</label>
+                        <select class="form-select touch-input" id="item_id" name="item_id" required>
+                            <option value="">Select Item</option>
+                            {% for item in items %}
+                            <option value="{{ item.id }}">{{ item.sku }} - {{ item.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control touch-input" id="quantity" name="quantity" value="1" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea class="form-control touch-input" id="notes" name="notes" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Log Print</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>Recent Prints</h2>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    {% for print in recent_prints %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ print.item.name }}</h5>
+                        <p class="mb-1">Printer: {{ print.printer.name }}</p>
+                        <p class="mb-1">Quantity: {{ print.quantity }}</p>
+                        <p class="mb-1">Time: {{ print.timestamp.strftime('%Y-%m-%d %H:%M') }}</p>
+                        {% if print.notes %}
+                        <p class="mb-1">Notes: {{ print.notes }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
